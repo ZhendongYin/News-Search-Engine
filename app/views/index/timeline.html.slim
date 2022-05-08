@@ -1,0 +1,13 @@
+/ index timeline html
+/Zhendong yiinn
+- @categories.each do |key, values|
+  .news_area.p_100
+    .container
+      .row
+        .col-lg-8
+          .main_title2
+            h2 = key
+          .latest_news
+            ul.ordered-list
+              - values.each do |value|
+                li =link_to value.event, "/search?query=#{value.event}"

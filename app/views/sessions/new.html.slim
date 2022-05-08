@@ -1,0 +1,17 @@
+/ login page
+/ Zhenndong Yin
+.log_main
+    .logo.text-center
+        h1 = link_to :Bingle, "/"
+    .content-w3ls.text-center
+        = image_tag "admin.png", class: "rounded"
+        = render_flash_messages
+        = form_with(url: sessions_path, scope: :session, local: true) do |f|
+            .wthree-field
+                = f.email_field :email, placeholder: :email
+            .wthree-field
+                = f.password_field :password, placeholder: :Password
+            .wthree-field
+                = f.submit "Log in", class: "btn", style: 'background-color:#ff1857'
+            .login-bottom
+                = link_to "Create An Account", signup_sessions_path

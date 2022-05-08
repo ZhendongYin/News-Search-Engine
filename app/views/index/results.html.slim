@@ -1,0 +1,43 @@
+/ search results html
+/ Zhendong Yin
+.section.news_area.p_100
+  .container
+    .row
+      .col-lg-8
+        .main_title2
+          h2 Search Result
+        = "#{@cost} seconds"
+        .latest_news
+          - @result.each do |result|
+            - content = result['_source']
+            - language_source = {'zh' => 'Chinese', 'fr' =>  'French', 'ru' => 'Russian'}
+            .media
+              .d-flex
+              .media-body
+                .choice_text
+                  .date
+                    
+                    a.gad_btn href="#" = content['source']
+                    a href="#"
+                      i.fa.fa-calendar aria-hidden="true" = Time.parse(content['time']).strftime("%B %d, %Y")
+                    a href="#"
+                      i.fa.fa-comments-o aria-hidden="true" = content["comments"]
+                    
+                    input.range.blue type="range" value="#{content["sentiment"].to_f.round(1) * 50 + 50}" disabled="disabled"
+
+
+                  = link_to index_path(id: content['id'])
+                    h4 = content['title_translation'].strip
+                  - if content['language'] != 'en'
+                    = "Origin language (#{language_source[content['language']]}): #{content['title']} "
+                  p 
+                    = content['content'][0..150]
+                    |...
+
+          .text-center
+            .btn-group
+              = will_paginate @result, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+
+
+
+            

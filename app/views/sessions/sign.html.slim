@@ -1,0 +1,19 @@
+/ sign up page
+/ Zhenndong Yin
+.log_main
+    .logo.text-center
+        h1 = link_to :Bingle, "/"
+    .content-w3ls.text-center
+        = image_tag "admin.png", class: "rounded"
+        = render_flash_messages
+        = form_with(url: save_sessions_path, scope: :session, local: true, html: { autocomplete: "off" }) do |f|
+            .wthree-field
+                = f.text_field :name, placeholder: :name, autocomplete: 'off'
+            .wthree-field
+                = f.email_field :email, placeholder: :email,autocomplete: 'off'
+            .wthree-field
+                = f.password_field :password, placeholder: :Password, autocomplete: 'off'
+            .wthree-field
+                = f.password_field :password_confirmation , placeholder: 'Password Confirmation', autocomplete: 'off'
+            .wthree-field
+                = f.submit "Sign up", class: :btn, style: 'background-color:#ff1857'

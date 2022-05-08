@@ -1,0 +1,73 @@
+/ news content html
+/ Zhendong Yin
+- require "erb"
+- language_source = {'zh' => 'Chinese', 'fr' =>  'French', 'ru' => 'Russian'}
+section.news_area.single-post-area.p_100
+  .container
+    .row
+      .col-lg-8
+        .main_blog_details
+          - if @news.language == 'en'
+            h4 = @news.title
+          - else
+            h4 = @news.news_translation.title.strip
+            h5 = "Origin language (#{language_source[@news.language]}): #{@news.title} "
+          .user_details
+            .float-left
+              a href="#" = @news.source
+              = link_to 'Search By Google', "http://www.google.com/search?q=#{@news.title.gsub(" ", "+")}"
+            .float-right
+              .media
+                .media-body  
+                  h5 = @news.author
+                  p = @news.time.strftime("%B %d, %Y")
+          - if @news.language == 'en'
+            p = @news.content
+          - else
+            p = @news.news_translation.content
+            p = "Origin language (#{language_source[@news.language]}): #{@news.content}"
+    br
+    br
+    br
+    br
+    .row
+      hr.divider style="width:65%"
+    .row
+      .col-lg-8
+        .single-footer-widget.m_news_widgets
+          .main_title2
+            h2 Comments
+          .m_news
+            - @news.comments.each do |comment|
+              .media
+                .d-flex
+                  = image_tag "#{rand(7) + 1}.jpg", class: "rounded",  size: "70x70"
+                .media-body
+                  h5 = "#{comment.user.name}:"
+                  .date
+                    a href="#"
+                      i.fa.fa-calendar aria-hidden="true"
+                      = comment.created_at
+                  .media-body
+                    h6 = comment.content
+
+    br
+    .row
+      hr.divider style="width:65%"
+    .row
+      .col-lg-9
+        = form_with(url: comments_path, scope: :comments, local: true) do |f|
+          .col-md-6
+            .form-group.text-right
+              = f.hidden_field :news_id, value: @news.id
+              = f.text_area :content, class: 'form-control', placeholder: "Enter your comment here"
+            .form-group.text-right
+              = f.submit :submit, class: 'submit_btn'
+
+
+
+          
+
+
+            
+

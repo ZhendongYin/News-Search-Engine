@@ -39,9 +39,9 @@ class IndexController < ApplicationController
     filter.filter(@keyword.split).each do |e|
       stem << Text::PorterStemming.stem(e.downcase)
     end
-    if false
+    # if false
     # redis cache resules
-    # if @result = $redis_client.get(key_words)
+    if @result = $redis_client.get(key_words)
       @result = eval(@result)
     else
       # build elasticsearch query

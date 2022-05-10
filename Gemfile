@@ -65,7 +65,8 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.8'
 gem 'bcrypt', '~> 3.1', '>= 3.1.17'
 gem 'flash_rails_messages', '~> 2.3'
 gem 'text', '~> 1.3', '>= 1.3.1'
-
+gem 'stopwords-filter', '~> 0.7.0'
+gem 'stopwords', '~> 0.2'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

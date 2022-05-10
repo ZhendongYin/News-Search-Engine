@@ -8,6 +8,7 @@ namespace :import do
     key = "AIzaSyCchmYhlK2XNdbvSf7trocydI8jv6a7Ay0"
     e_client = Elasticsearch::Client.new log: true
     client = Google::Cloud::Translate::V2.new(key: key)
+    filter = Stopwords::Snowball::Filter.new "en"
 
     keys = $ela_index
     `curl -XDELETE http://localhost:9200/#{keys}`
@@ -32,7 +33,7 @@ namespace :import do
       puts news.title
       # word processing 
       stem = []
-      "#{news.news_translation&.title || news.title} #{news.news_translation&.content || news.content}".split(" ").each do |t|
+      filter.filter("#{news.news_translation&.title || news.title} #{news.news_translation&.content || news.content}".split).each do |t|
         stem << Text::PorterStemming.stem(t.downcase)
       end
 

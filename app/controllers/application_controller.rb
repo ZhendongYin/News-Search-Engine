@@ -1,3 +1,4 @@
+# Yifan Zhu, Zhendong Yin
 class ApplicationController < ActionController::Base
   include SessionsHelper
   

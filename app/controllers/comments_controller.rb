@@ -1,4 +1,7 @@
+# Zhendong Yin
 class CommentsController < ApplicationController
+
+  # user create comments
   def create
     if !current_user
       redirect_to new_session_path

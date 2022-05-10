@@ -25,6 +25,7 @@ class IndexController < ApplicationController
       redirect_to index_index_path
       return
     end
+    filter = Stopwords::Snowball::Filter.new "en"
     @page = :results
     @cost = Time.now
     @q = params[:query]
@@ -35,12 +36,12 @@ class IndexController < ApplicationController
     @keyword = params[:query]
     # query processing
     stem = []
-    @keyword.split(" ").each do |e|
+    filter.filter(@keyword.split).each do |e|
       stem << Text::PorterStemming.stem(e.downcase)
     end
-    # if false
+    if false
     # redis cache resules
-    if @result = $redis_client.get(key_words)
+    # if @result = $redis_client.get(key_words)
       @result = eval(@result)
     else
       # build elasticsearch query

@@ -5,7 +5,7 @@ namespace :import do
   task elasticsearch: :environment do
     require "google/cloud/translate/v2"
     require 'elasticsearch'
-    key = "AIzaSyCchmYhlK2XNdbvSf7trocydI8jv6a7Ay0"
+    key = ""
     e_client = Elasticsearch::Client.new log: true
     client = Google::Cloud::Translate::V2.new(key: key)
     filter = Stopwords::Snowball::Filter.new "en"

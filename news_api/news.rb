@@ -4,7 +4,7 @@ require 'news-api'
 require 'active_record'
 require 'sqlite3'
 
-KEY = '7ff05f9448fa4e46b02f070bd94f5220'
+KEY = ''
 n = News.new(KEY)
 ActiveRecord::Base.establish_connection adapter: "sqlite3", database: "news_datas"
 
